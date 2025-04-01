@@ -4,14 +4,14 @@ import org.gradle.kotlin.dsl.get
 
 class PreloaderPlugin() : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
-        val task = tasks.register("jsPreloader", PreloaderTask::class.java)
+        val task = tasks.register("browserPreloader", PreloaderTask::class.java)
         val extension = extensions.create("preloader", PreloaderPluginExtensions::class.java)
         val defaultBuild = "${target.layout.buildDirectory.asFile.get().path}/dist/wasmJs/productionExecutable"
         val path = extension.distributionPath.getOrElse(defaultBuild).removeSuffix("/")
 
         task.configure {
-            projectDir.set(target.projectDir)
-            outputDistributionDir.set(file("$path/preloader"))
+            val file = file("$path/preloader")
+            outputDistributionDir.set(file.absolutePath)
 
             jsModuleName.set(extension.jsModuleName)
             css.set(extension.css)
@@ -23,8 +23,7 @@ class PreloaderPlugin() : Plugin<Project> {
         afterEvaluate {
             checks(extension)
 
-            task.get().dependsOn(target.tasks["wasmJsBrowserDistribution"])
-            target.tasks["wasmJsBrowserProductionWebpack"].finalizedBy(task)
+            target.tasks["wasmJsBrowserDistribution"].finalizedBy(task)
         }
     }
 

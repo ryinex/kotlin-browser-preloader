@@ -4,23 +4,16 @@ import files.preloaderHtml
 import files.preloaderJs
 import java.io.File
 import org.gradle.api.DefaultTask
-import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
-import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
 abstract class PreloaderTask : DefaultTask() {
-
-    @get:InputDirectory
-    abstract val projectDir: DirectoryProperty
-
-    @get:OutputDirectory
-    abstract val outputDistributionDir: DirectoryProperty
+    @get:Input
+    abstract val outputDistributionDir: Property<String>
 
     @get:Input
     abstract val jsModuleName: Property<String>
@@ -55,7 +48,7 @@ abstract class PreloaderTask : DefaultTask() {
                 jsModuleName.set("<module name>")
             }
         """.trimIndent()
-        val path = outputDistributionDir.get().asFile.absolutePath
+        val path = outputDistributionDir.get()
         val moduleName = jsModuleName.orNull ?: error(moduleNameError)
         val html = html.orNull
         val css = css.orNull

@@ -33,7 +33,7 @@ mavenPublishing {
 
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
-    signAllPublications()
+    if (System.getProperty("ENVIRONMENT") == "prod") signAllPublications()
 
     coordinates(rootProject.group.toString(), "browser-preloader", rootProject.version.toString())
 

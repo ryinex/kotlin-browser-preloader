@@ -49,6 +49,7 @@ jobs:
                 run: |
                     RESULT=$(echo ${{ github.ref_name }} | sed 's/preloader.//g')
                     echo "VERSION_NAME=$RESULT" >> .env
+                    echo "ENVIRONMENT='prod'" >> .env
 
             -   name: Publish to MavenCentral
                 run: ./gradlew :plugin:publishToMavenCentral --stacktrace --quiet
