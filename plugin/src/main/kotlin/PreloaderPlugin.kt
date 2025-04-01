@@ -10,8 +10,8 @@ class PreloaderPlugin() : Plugin<Project> {
         val path = extension.distributionPath.getOrElse(defaultBuild).removeSuffix("/")
 
         task.configure {
-            projectDir.set(target.projectDir)
-            outputDistributionDir.set(file("$path/preloader"))
+            val file = file("$path/preloader")
+            outputDistributionDir.set(file.absolutePath)
 
             jsModuleName.set(extension.jsModuleName)
             css.set(extension.css)
