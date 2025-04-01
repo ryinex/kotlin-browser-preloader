@@ -1,0 +1,114 @@
+Type-safe project accessors is an incubating feature.
+Project accessors enabled, but root project name not explicitly set for 'preloader-plugin'. Checking out the project in different folders will impact the generated code and implicitly the buildscript classpath, breaking caching.
+> Task :preloader-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :preloader-plugin:pluginDescriptors
+> Task :preloader-plugin:processResources
+> Task :preloader-plugin:compileKotlin
+> Task :preloader-plugin:compileJava NO-SOURCE
+> Task :preloader-plugin:classes
+> Task :preloader-plugin:jar
+
+> Task :preloader-plugin:tasks
+
+------------------------------------------------------------
+Tasks runnable from project ':preloader-plugin'
+------------------------------------------------------------
+
+Build tasks
+-----------
+assemble - Assembles the outputs of this project.
+build - Assembles and tests this project.
+buildDependents - Assembles and tests this project and all projects that depend on it.
+buildKotlinToolingMetadata - Build metadata json file containing information about the used Kotlin tooling
+buildNeeded - Assembles and tests this project and all projects it depends on.
+classes - Assembles main classes.
+clean - Deletes the build directory.
+jar - Assembles a jar archive containing the classes of the 'main' feature.
+javadocJar - Assembles a jar archive containing the main javadoc.
+kotlinSourcesJar - Assembles a jar archive containing the sources of target 'kotlin'.
+sourcesJar - Assembles a jar archive containing the main sources.
+testClasses - Assembles test classes.
+
+Build Setup tasks
+-----------------
+init - Initializes a new Gradle build.
+updateDaemonJvm - Generates or updates the Gradle Daemon JVM criteria.
+wrapper - Generates Gradle wrapper files.
+
+Documentation tasks
+-------------------
+javadoc - Generates Javadoc API documentation for the 'main' feature.
+
+Help tasks
+----------
+artifactTransforms - Displays the Artifact Transforms that can be executed in project ':preloader-plugin'.
+buildEnvironment - Displays all buildscript dependencies declared in project ':preloader-plugin'.
+dependencies - Displays all dependencies declared in project ':preloader-plugin'.
+dependencyInsight - Displays the insight into a specific dependency in project ':preloader-plugin'.
+help - Displays a help message.
+javaToolchains - Displays the detected java toolchains.
+kotlinDslAccessorsReport - Prints the Kotlin code for accessing the currently available project extensions and conventions.
+outgoingVariants - Displays the outgoing variants of project ':preloader-plugin'.
+projects - Displays the sub-projects of project ':preloader-plugin'.
+properties - Displays the properties of project ':preloader-plugin'.
+resolvableConfigurations - Displays the configurations that can be resolved in project ':preloader-plugin'.
+tasks - Displays the tasks runnable from project ':preloader-plugin'.
+
+Plugin development tasks
+------------------------
+pluginDescriptors - Generates plugin descriptors from plugin declarations.
+pluginUnderTestMetadata - Generates the metadata for plugin functional tests.
+validatePlugins - Validates the plugin by checking parameter annotations on task and artifact transform types etc.
+
+Plugin Portal tasks
+-------------------
+login - Update the gradle.properties files so this machine can publish to the Gradle Plugin portal.
+publishPlugins - Publishes this plugin to the Gradle Plugin portal.
+
+Publishing tasks
+----------------
+generateMetadataFileForPluginMavenPublication - Generates the Gradle metadata file for publication 'pluginMaven'.
+generateMetadataFileForPreloaderPluginMarkerMavenPublication - Generates the Gradle metadata file for publication 'preloaderPluginMarkerMaven'.
+generatePomFileForPluginMavenPublication - Generates the Maven POM file for publication 'pluginMaven'.
+generatePomFileForPreloaderPluginMarkerMavenPublication - Generates the Maven POM file for publication 'preloaderPluginMarkerMaven'.
+publish - Publishes all publications produced by this project.
+publishAllPublicationsToMavenCentralRepository - Publishes all Maven publications produced by this project to the mavenCentral repository.
+publishPluginMavenPublicationToMavenCentralRepository - Publishes Maven publication 'pluginMaven' to Maven repository 'mavenCentral'.
+publishPluginMavenPublicationToMavenLocal - Publishes Maven publication 'pluginMaven' to the local Maven repository.
+publishPreloaderPluginMarkerMavenPublicationToMavenCentralRepository - Publishes Maven publication 'preloaderPluginMarkerMaven' to Maven repository 'mavenCentral'.
+publishPreloaderPluginMarkerMavenPublicationToMavenLocal - Publishes Maven publication 'preloaderPluginMarkerMaven' to the local Maven repository.
+publishToMavenLocal - Publishes all Maven publications produced by this project to the local Maven cache.
+
+Release tasks
+-------------
+createStagingRepository - Create a staging repository on Sonatype OSS
+dropRepository - Drops a staging repository on Sonatype OSS
+publishAndReleaseToMavenCentral - Publishes to a staging repository on Sonatype OSS and releases it to MavenCentral
+publishToMavenCentral - Publishes to a staging repository on Sonatype OSS
+releaseRepository - Releases a staging repository on Sonatype OSS
+
+Verification tasks
+------------------
+check - Runs all checks.
+checkKotlinGradlePluginConfigurationErrors - Checks that Kotlin Gradle Plugin hasn't reported project configuration errors, failing otherwise. This task always runs before compileKotlin* or similar tasks.
+test - Runs the test suite.
+
+Rules
+-----
+Pattern: clean<TaskName>: Cleans the output files of a task.
+Pattern: build<ConfigurationName>: Assembles the artifacts of a configuration.
+
+To see all tasks and more detail, run gradlew tasks --all
+
+To see more detail about a task, run gradlew help --task <task>
+
+[Incubating] Problems report is available at: file:///home/ahmed/gits/ryinex/preloader/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.13/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1s
+5 actionable tasks: 5 executed
