@@ -43,12 +43,7 @@ internal fun script(path: String) {
 
     // Modify preloader.js
     val preloaderJsPath = projectDir.resolve("preloader/preloader.js")
-    replaceInFile(preloaderJsPath, "const list = \\[(.|\n)*\\]", listStr)
-//    replaceInFile(
-//        preloaderJsPath,
-//        "const moduleScript = \".*\"",
-//        "const moduleScript = \"$wasmAppName\""
-//    )
+    replaceInFile(preloaderJsPath, Regex("const list = \\[[^\\]]*\\]"), listStr)
 
     // Modify index.html
     val indexPath = projectDir.resolve("index.html")
@@ -101,11 +96,14 @@ private fun File.allFileChildren(): List<File> {
 }
 
 @Throws(IOException::class)
-private fun replaceInFile(filePath: Path, regex: String, replacement: String?) {
+private fun replaceInFile(filePath: Path, regex: Regex, replacement: String?) {
     log("Replacing in file $filePath, regex: $regex")
     val content = readFile(filePath)
-    val regex = regex.toRegex()
-    val newContent = content.replace(regex, replacement!!)
+    log("Replacement: $replacement")
+    val firstMatch = regex.find(content)?.value ?: return
+    log("content:\n$content")
+    val newContent = content.replaceFirst(firstMatch, replacement!!)
+    log("Regex replaced $newContent")
     writeFile(filePath, newContent)
     log("Replaced in file $filePath")
 }
