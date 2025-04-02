@@ -36,6 +36,7 @@ abstract class PreloaderTask : DefaultTask() {
 
     @TaskAction
     fun run() {
+        println("[LOG] Preloader task running")
         val logoErrorMessage = """
             Please provide an svg logo image for the preloader like this:
             preloader {
@@ -71,20 +72,25 @@ abstract class PreloaderTask : DefaultTask() {
     }
 
     private fun String.file(): File {
+        println("[LOG] Creating file: $this")
         val file = kotlin.io.path.createTempFile().toFile()
         if (!file.parentFile.exists()) file.parentFile.mkdirs()
         if (!file.exists()) file.createNewFile()
 
         file.writeText(this)
 
+        println("[LOG] Created file: $this")
+
         return file
     }
 
     private fun File.copy(path: String, name: String): File {
+        println("[LOG] Copying file: $this to $path")
         val file = File(path, name)
         if (!file.parentFile.exists()) file.parentFile.mkdirs()
         if (!file.exists()) file.createNewFile()
         this.copyTo(file, true)
+        println("[LOG] Copied file: $this to $path")
         return file
     }
 }
