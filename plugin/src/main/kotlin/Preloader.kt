@@ -104,9 +104,8 @@ private fun File.allFileChildren(): List<File> {
 private fun replaceInFile(filePath: Path, regex: String, replacement: String?) {
     log("Replacing in file $filePath, regex: $regex")
     val content = readFile(filePath)
-    val pattern = Pattern.compile(regex, Pattern.DOTALL)
-    val matcher = pattern.matcher(content)
-    val newContent = matcher.replaceFirst(replacement)
+    val regex = regex.toRegex()
+    val newContent = content.replace(regex, replacement!!)
     writeFile(filePath, newContent)
     log("Replaced in file $filePath")
 }
@@ -118,9 +117,8 @@ private fun removeBetweenMarkers(filePath: Path, startMarker: String, endMarker:
     val pattern = Pattern.compile(
         Pattern.quote(startMarker) + "(.|\n)*?" + Pattern.quote(endMarker),
         Pattern.DOTALL
-    )
-    val matcher = pattern.matcher(content)
-    val newContent = matcher.replaceAll("")
+    ).toRegex()
+    val newContent = content.replace(pattern, "")
     writeFile(filePath, newContent)
     log("Removed between markers in file $filePath")
 }
