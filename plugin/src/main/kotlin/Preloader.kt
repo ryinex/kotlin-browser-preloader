@@ -8,7 +8,7 @@ import kotlin.io.path.absolutePathString
 
 @Throws(IOException::class, InterruptedException::class)
 internal fun script(path: String) {
-    println("[LOG] Preloader script running")
+    log("Preloader script running")
     val scriptDir = kotlin.io.path.Path(path)
 
     val projectDir = scriptDir.parent
@@ -73,19 +73,19 @@ internal fun script(path: String) {
 
 @Throws(IOException::class)
 private fun findFiles(parent: String, directory: Path, pattern: String): List<String> {
-    println("[LOG] Finding files in $directory, pattern: $pattern")
+    log("Finding files in $directory, pattern: $pattern")
     directory.toFile().list()
     val result = directory
         .toFile()
         .allFileChildren()
         .map { it.absolutePath.replace("$parent/", "") }
         .filter { it.matches(pattern.toRegex()) }
-    println("[LOG] Found files in $directory: ${result.size}")
+    log("Found files in $directory: ${result.size}")
     return result
 }
 
 private fun File.allFileChildren(): List<File> {
-    println("[LOG] Finding files in $absolutePath")
+    log("Finding files in $absolutePath")
     val list = mutableListOf<File>()
 
     for (file in this.listFiles() ?: emptyArray()) {
@@ -95,25 +95,25 @@ private fun File.allFileChildren(): List<File> {
             list.add(file)
         }
     }
-    println("[LOG] Found files in $absolutePath: ${list.size}")
+    log("Found files in $absolutePath: ${list.size}")
 
     return list
 }
 
 @Throws(IOException::class)
 private fun replaceInFile(filePath: Path, regex: String, replacement: String?) {
-    println("[LOG] Replacing in file $filePath, regex: $regex")
+    log("Replacing in file $filePath, regex: $regex")
     val content = readFile(filePath)
     val pattern = Pattern.compile(regex, Pattern.DOTALL)
     val matcher = pattern.matcher(content)
     val newContent = matcher.replaceFirst(replacement)
     writeFile(filePath, newContent)
-    println("[LOG] Replaced in file $filePath")
+    log("Replaced in file $filePath")
 }
 
 @Throws(IOException::class)
 private fun removeBetweenMarkers(filePath: Path, startMarker: String, endMarker: String) {
-    println("[LOG] Removing between markers in file $filePath,")
+    log("Removing between markers in file $filePath,")
     val content = readFile(filePath)
     val pattern = Pattern.compile(
         Pattern.quote(startMarker) + "(.|\n)*?" + Pattern.quote(endMarker),
@@ -122,29 +122,35 @@ private fun removeBetweenMarkers(filePath: Path, startMarker: String, endMarker:
     val matcher = pattern.matcher(content)
     val newContent = matcher.replaceAll("")
     writeFile(filePath, newContent)
-    println("[LOG] Removed between markers in file $filePath")
+    log("Removed between markers in file $filePath")
 }
 
 @Throws(IOException::class)
 private fun insertBefore(filePath: Path, target: String, insertion: String?) {
-    println("[LOG] Inserting before marker in file $filePath")
+    log("Inserting before marker in file $filePath")
     val content = readFile(filePath)
     val newContent = content.replace(target, insertion + target)
     writeFile(filePath, newContent)
-    println("[LOG] Inserted before marker in file $filePath")
+    log("Inserted before marker in file $filePath")
 }
 
 @Throws(IOException::class)
 private fun readFile(filePath: Path): String {
-    println("[LOG] Reading file $filePath")
+    log("Reading file $filePath")
     val content = String(Files.readAllBytes(filePath), StandardCharsets.UTF_8)
-    println("[LOG] Read file $filePath")
+    log("Read file $filePath")
     return content
 }
 
 @Throws(IOException::class)
 private fun writeFile(filePath: Path, content: String) {
-    println("[LOG] Writing file $filePath")
+    log("Writing file $filePath")
     Files.write(filePath, content.toByteArray(StandardCharsets.UTF_8))
-    println("[LOG] Written file $filePath")
+    log("Written file $filePath")
+}
+
+internal var logEnabled = false
+
+internal fun log(message: String) {
+    if (logEnabled) println("[LOG][Browser Preloader] $message")
 }

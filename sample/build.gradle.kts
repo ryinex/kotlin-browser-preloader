@@ -42,4 +42,5 @@ kotlin {
 preloader {
     jsModuleName.set("sample")
     logo.set(file("preloader/logo.svg"))
+    logEnabled.set(true)
 }

@@ -18,6 +18,8 @@ class PreloaderPlugin() : Plugin<Project> {
             html.set(extension.html)
             logo.set(extension.logo)
             lengthHeader.set(extension.lengthHeader)
+
+            logEnabled = extension.logEnabled.getOrElse(false)
         }
 
         afterEvaluate {

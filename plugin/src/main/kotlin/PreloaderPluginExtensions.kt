@@ -8,4 +8,5 @@ interface PreloaderPluginExtensions {
     val html: RegularFileProperty
     val logo: RegularFileProperty
     val lengthHeader: Property<String>
+    val logEnabled: Property<Boolean>
 }
