@@ -41,8 +41,6 @@ jobs:
       - name: Build application
         run: |
             ./gradlew kotlinUpgradeYarnLock && ./gradlew wasmJsBrowserDistribution --stacktrace
-            brotli sample/build/dist/wasmJs/productionExecutable/*.*
-            brotli sample/build/dist/wasmJs/productionExecutable/composeResources/*/*/*.*
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
