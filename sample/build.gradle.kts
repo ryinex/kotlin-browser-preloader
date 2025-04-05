@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinSerialization)
     id("com.ryinex.kotlin.browser.preloader")
 }
 
@@ -35,6 +36,13 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+
+            implementation(libs.multiplatform.settings)
+            implementation(libs.multiplatform.settings.coroutines)
+            implementation(libs.multiplatform.settings.no.arg)
+            implementation(libs.multiplatform.settings.serialization)
+
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
         }
     }
 }
